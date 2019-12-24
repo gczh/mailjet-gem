@@ -2,6 +2,7 @@ require 'action_mailer'
 require 'mail'
 require 'base64'
 require 'json'
+require 'pry'
 
 # Mailjet::Mailer enables to send a Mail::Message via Mailjet SMTP relay servers
 # User is the API key, and password the API secret
@@ -202,9 +203,7 @@ class Mailjet::APIMailer
 
     payload = {
       :To=> to,
-    }.merge(content)
-    .merge(base_from)
-    .merge(@delivery_method_options_v3_1)
+    }.merge(content).merge(base_from).merge(@delivery_method_options_v3_1)
 
     payload[:Subject] = mail.subject if !mail.subject.blank?
     payload[:Sender] = mail[:sender] if !mail[:sender].blank?
